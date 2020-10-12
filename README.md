@@ -41,7 +41,7 @@ And then go to the IP address of your desktop/laptop from browser of mobile devi
 On iOS, you can add to Home screen so that it can stay full screen without any toolbars.
 
 ## Landscape mode
-![Running in iPhone](remote-resource-monitor-lite.png)
+![Running in iPhone](remote-cpu-monitor-lite.png)
 
 
 ### License
