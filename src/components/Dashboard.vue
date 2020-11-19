@@ -56,6 +56,7 @@ export default {
             // perCpuTemp: response.data.cpu.cores,
             mem: Number(response.data.mem.used / response.data.mem.total) * 100,
           });
+          this.error = null;
           this.loading = false;
         })
         .catch((error) => console.log((this.error = error)));

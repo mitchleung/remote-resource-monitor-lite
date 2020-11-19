@@ -2,33 +2,42 @@
   <div class="chart">
     <div class="chart__container">
       <div class="radialProgressBar" :class="progressClass">
-        <svg class="svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <circle 
-            class="base"
-            :cx="cx"
-            :cy="cy"
-            :r="trackRadius"
-            :stroke-width="baseStrokeWidth"
-            stroke-linecap="round"
-            :stroke-dashoffset="0"
-            :stroke-dasharray="circumference"
-            fill="none"
-          />
-          <circle 
-            class="active"
-            :cx="cx"
-            :cy="cy"
-            :r="trackRadius"
-            :stroke-width="strokeWidth"
-            stroke-linecap="round"
-            :stroke-dashoffset="dashOffset"
-            :stroke-dasharray="circumference"
-            fill="none"
-          />
+        <svg
+          class="svg"
+          :viewBox="viewBox"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g>
+            <circle
+              class="base"
+              :cx="cx"
+              :cy="cy"
+              :r="trackRadius"
+              :stroke-width="baseStrokeWidth"
+              stroke-linecap="round"
+              :stroke-dashoffset="baseOffset"
+              :stroke-dasharray="circumference"
+              fill="transparent"
+            />
+            <circle
+              class="active"
+              :cx="cx"
+              :cy="cy"
+              :r="trackRadius"
+              :stroke-width="strokeWidth"
+              stroke-linecap="round"
+              :stroke-dashoffset="dashOffset"
+              :stroke-dasharray="circumference"
+              fill="transparent"
+            />
+           
+          </g>
         </svg>
         <div class="overlay">
           <div v-if="label" class="overlay__label">{{ label }}</div>
-          <div v-if="displayValue" class="overlay__value">{{ visualValue }}{{ suffix }}</div>
+          <div v-if="displayValue" class="overlay__value">
+            {{ visualValue }}{{ suffix }}
+          </div>
         </div>
       </div>
     </div>
@@ -42,10 +51,11 @@ export default {
     label: String,
     displayValue: Number,
     suffix: String,
-    strokeWidth: {type: Number, default: 10},
-    radius: {type: Number, default: 50},
-    cx: {type: Number, default: 50},
-    cy: {type: Number, default: 50},
+    viewBox: {type: String, default: "0 0 100 100"},
+    strokeWidth: { type: Number, default: 10 },
+    radius: { type: Number, default: 50 },
+    cx: { type: Number, default: 50 },
+    cy: { type: Number, default: 50 },
   },
   computed: {
     progressClass: function () {
@@ -54,25 +64,29 @@ export default {
         : "";
       return css;
     },
-    baseStrokeWidth: function() {
+    baseStrokeWidth: function () {
       return 1 * this.strokeWidth;
     },
-    circumference: function() {
-      return 2* Math.PI * this.radius;
+    circumference: function () {
+      return 2 * Math.PI * this.trackRadius;
     },
-    trackRadius: function() {
-      return this.radius - this.strokeWidth/ 2;
+    trackRadius: function () {
+      return this.radius - this.strokeWidth / 2;
     },
-    dashArray: function() {
-      const percent = (this.displayValue) / 100 * this.circumference;
+    dashArray: function () {
+      const percent = (this.displayValue / 100) * this.circumference;
       return percent;
     },
-    dashOffset: function() {
-      const percent = (100 - this.displayValue) / 100 * this.circumference;
+    dashOffset: function () {
+      const percent = ((100 - this.displayValue) / 100) * this.circumference;
       return percent;
     },
     visualValue: function () {
       return this.displayValue.toFixed(1);
+    },
+    baseOffset: function () {
+      const percent = this.circumference * 0.25;
+      return percent;
     },
   },
 };
@@ -109,11 +123,15 @@ svg.svg {
   width: 100%;
   height: 100%;
 
+  g {
+    transform-origin: 50% 50%;
+    transform: rotateZ(135deg);
+  }
+
   circle {
     transition: all 250ms ease;
     transform-origin: 50% 50%;
-    fill: none;
-    transform: rotateZ(-90deg);
+    fill: transparent;
     &.base {
       z-index: 1;
       stroke: rgba($text-color, 0.25);

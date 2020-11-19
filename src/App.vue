@@ -4,6 +4,11 @@
       <div class="grid__cell" v-if="this.$store.state.cpu">
         <Chart 
           :displayValue="this.$store.state.cpu" 
+          viewBox="0 0 100 100"
+          :radius="50"
+          :strokeWidth="5"
+          :cx="50"
+          :cy="50"
           label="CPU" 
           suffix="%"
         />
@@ -11,6 +16,11 @@
       <div class="grid__cell" v-if="this.$store.state.cpuTemp">
         <Chart 
           :displayValue="this.$store.state.cpuTemp" 
+          viewBox="0 0 100 100"
+          :radius="50"
+          :strokeWidth="5"
+          :cx="50"
+          :cy="50"
           label="Temp" 
           suffix="°C"
         />
