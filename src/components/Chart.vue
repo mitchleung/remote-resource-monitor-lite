@@ -73,12 +73,12 @@ export default {
     trackRadius: function () {
       return this.radius - this.strokeWidth / 2;
     },
-    dashArray: function () {
-      const percent = (this.displayValue / 100) * this.circumference;
-      return percent;
-    },
+    // dashArray: function () {
+    //   const percent = (this.displayValue / 100) * this.circumference;
+    //   return percent;
+    // },
     dashOffset: function () {
-      const percent = ((100 - this.displayValue) / 100) * this.circumference;
+      const percent = ((100 - this.displayValue * .75) / 100 ) * this.circumference;
       return percent;
     },
     visualValue: function () {
