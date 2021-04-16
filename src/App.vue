@@ -25,7 +25,6 @@
           suffix="°C"
         />
       </div>
-
       <Dashboard apiPath="/api/all" apiPort="3000" />
     </div>
   </div>
@@ -63,14 +62,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  max-width: 100vw;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   .grid {
     display: flex;
-    height: 100%;
+    height: 100vh;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
     &__cell {
       @media (orientation: landscape) {
         flex: 1 1 50%;
@@ -81,7 +82,6 @@ body {
         padding: 0 10%;
       }
     }
-
   }
 }
 @keyframes gradient {

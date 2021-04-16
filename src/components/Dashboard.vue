@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="dashboard" v-if="loading || error">
     <div v-if="loading" class="loading">Loading ...</div>
     <div v-if="error" class="error">{{ error }}</div>
   </div>
